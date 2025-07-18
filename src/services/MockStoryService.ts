@@ -114,7 +114,7 @@ export class MockStoryService {
   private generateCoherentScenario(request: LLMStoryRequest, lastChoice: any, template: any): string {
     const characterName = request.characterName;
     const consequence = lastChoice.consequence || 'The outcome unfolds...';
-    
+    template = template || this.templates.fantasy;
     // Create scenario that follows from the last choice
     const continuationTemplates = {
       fantasy: [
