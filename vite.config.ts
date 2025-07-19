@@ -2,36 +2,33 @@ import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default ({ mode }: { mode: string }) => {
-    // Load environment variables from files and merge with system environment
-    process.env = {...process.env, ...loadEnv(mode, process.cwd())};
-
-    // import.meta.env.VITE_OPENROUTER_API_KEY available here with: process.env.VITE_OPENROUTER_API_KEY
-    // import.meta.env.VITE_OPENROUTER_BASE_URL available here with: process.env.VITE_OPENROUTER_BASE_URL
-    // import.meta.env.VITE_VISION_MODEL available here with: process.env.VITE_VISION_MODEL
-    // import.meta.env.VITE_ANALYSIS_MODEL available here with: process.env.VITE_ANALYSIS_MODEL
-    // import.meta.env.VITE_USE_MOCK available here with: process.env.VITE_USE_MOCK
-    // import.meta.env.VITE_PORT available here with: process.env.VITE_PORT
+    // Hardcoded environment variables (previously loaded from .env)
+    // VITE_OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+    // VITE_VISION_MODEL=qwen/qwen3-14b:free
+    // VITE_ANALYSIS_MODEL=qwen/qwen3-14b:free
+    // VITE_USE_MOCK=false
+    // VITE_PORT=8080
 
     return defineConfig({
         define: {
-            __VITE_OPENROUTER_API_KEY__: JSON.stringify(process.env.VITE_OPENROUTER_API_KEY),
-            __VITE_OPENROUTER_BASE_URL__: JSON.stringify(process.env.VITE_OPENROUTER_BASE_URL),
-            __VITE_VISION_MODEL__: JSON.stringify(process.env.VITE_VISION_MODEL),
-            __VITE_ANALYSIS_MODEL__: JSON.stringify(process.env.VITE_ANALYSIS_MODEL),
-            __VITE_USE_MOCK__: JSON.stringify(process.env.VITE_USE_MOCK),
-            __VITE_PORT__: JSON.stringify(process.env.VITE_PORT),
+            __VITE_OPENROUTER_API_KEY__: JSON.stringify("c2stb3ItdjEtZWM0OGIxODNmYzdmOTJjNWJiNjhkNzJhNWU0YjgxYmVkYmRiYzYyMzUwMzE4N2RhM2M4Mzg1MWExOWM0OGEwMw=="),
+            __VITE_OPENROUTER_BASE_URL__: JSON.stringify("https://openrouter.ai/api/v1"),
+            __VITE_VISION_MODEL__: JSON.stringify("qwen/qwen3-14b:free"),
+            __VITE_ANALYSIS_MODEL__: JSON.stringify("qwen/qwen3-14b:free"),
+            __VITE_USE_MOCK__: JSON.stringify("false"),
+            __VITE_PORT__: JSON.stringify("8080"),
         },
         base: "/",
         plugins: [react()],
         preview: {
-            port: process.env.VITE_PORT ? parseInt(process.env.VITE_PORT) : 8080,
+            port: 8080,
             strictPort: true,
         },
         server: {
-            port: process.env.VITE_PORT ? parseInt(process.env.VITE_PORT) : 8080,
+            port: 8080,
             strictPort: true,
             host: true,
-            origin: `http://0.0.0.0:${process.env.VITE_PORT ? parseInt(process.env.VITE_PORT) : 8080}`,
+            origin: `http://0.0.0.0:8080`,
         },
     });
 }

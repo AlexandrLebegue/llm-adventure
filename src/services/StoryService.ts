@@ -11,7 +11,7 @@ export class StoryService {
     this.llmService = new LLMService();
     this.mockService = new MockStoryService();
     
-    const forceMock = import.meta.env.VITE_USE_MOCK === 'true';
+    const forceMock = false;
     const llmConfigured = this.llmService.isConfigured();
     
     // Priority: explicit VITE_USE_MOCK=true forces mock, otherwise use LLM if configured
@@ -108,7 +108,7 @@ export class StoryService {
 
   getServiceStatus(): { service: 'LLM' | 'MOCK'; configured: boolean; reason?: string } {
     const configured = this.llmService.isConfigured();
-    const forceMock = import.meta.env.VITE_USE_MOCK === 'true';
+    const forceMock = false;
     
     if (forceMock) {
       return { service: 'MOCK', configured, reason: 'VITE_USE_MOCK=true' };
