@@ -32,7 +32,7 @@ STATEMENT_FEATURE_PLAN.md
 .Trashes
 ehthumbs.db
 Thumbs.db
-
+.env
 # Logs
 logs
 *.log
